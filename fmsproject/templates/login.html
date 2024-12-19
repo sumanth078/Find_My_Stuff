@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ===== Iconscout CSS ===== -->
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <!-- ===== CSS ===== -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <title>FindMyStuff</title>
+  </head>
+  <body>
+    <header>
+      <!-- Navbar -->
+      <nav class="navbar">
+        <!-- Left Logo and Name (FMS) -->
+        <div class="logo">
+          <a href="{% url 'index' %}">
+            <img src="{% static 'images/logo.jpg' %}" alt="Logo">
+            <span style="color: white;">FindMyStuff</span>
+          </a>
+        </div>
+        <!-- Center Menu Items -->
+        <div class="menu">
+          <a href="{% url 'index' %}">Home</a>
+          <a href="{% url 'aboutus' %}">About Us</a>
+          <div class="dropdown">
+            <a href="#">Lost</a>
+            <div class="dropdown-content">
+              <a href="#">View Lost Items</a>
+              <a href="{% url 'postLost' %}">Post Lost Items</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a href="#">Book Listings</a>
+            <div class="dropdown-content">
+              <a href="#">View posted books</a>
+              <a href="{% url 'postBook' %}">Post books</a>
+            </div>
+          </div>
+          <a href="{% url 'contactus' %}">Contact Us</a>
+        </div>
+
+        <!-- Right Login and SignUp Buttons -->
+        <div class="auth-buttons">
+          <a href="{% url 'login' %}" class="login">Login</a>
+          <a href="{% url 'registration' %}" class="signup">SignUp</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="loginPage">
+      <div class="logincontainer">
+        <div class="form login">
+          <span class="title">Login</span>
+          <h3 align="center"><mark>{{msg}}</mark></h3>
+          <form method="POST" action="{% url 'checkuserlogin' %}">
+            {% csrf_token %}
+            <div class="input-field">
+              <input type="text" name="studentid" placeholder="Enter your Student ID" required />
+              <i class="uil uil-envelope icon"></i>
+            </div>
+            <div class="input-field">
+              <input
+                type="password"
+                name="password"
+                class="password"
+                placeholder="Enter your password"
+                required
+              />
+              <i class="uil uil-lock icon"></i>
+              <i class="uil uil-eye-slash showHidePw"></i>
+            </div>
+
+            <div class="checkbox-text">
+              <div class="checkbox-content">
+                <input type="checkbox" id="logCheck" />
+                <label for="logCheck" class="text">Remember me</label>
+              </div>
+              <a href="#" class="text">Forgot password?</a>
+            </div>
+
+            <div class="input-field button">
+              <input type="submit" value="Login" />
+            </div>
+            <div class="login-signup">
+              <span class="text">
+                Not a member?
+                <a href="{% url 'registration' %}" class="text signup-link">Signup Now</a>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const pwShowHide = document.querySelectorAll(".showHidePw"),
+        pwFields = document.querySelectorAll(".password");
+
+      // JS code to show/hide password and change icon
+      pwShowHide.forEach((eyeIcon) => {
+        eyeIcon.addEventListener("click", () => {
+          pwFields.forEach((pwField) => {
+            if (pwField.type === "password") {
+              pwField.type = "text";
+
+              pwShowHide.forEach((icon) => {
+                icon.classList.replace("uil-eye-slash", "uil-eye");
+              });
+            } else {
+              pwField.type = "password";
+
+              pwShowHide.forEach((icon) => {
+                icon.classList.replace("uil-eye", "uil-eye-slash");
+              });
+            }
+          });
+        });
+      });
+    </script>
+
+    <footer class="footer">
+      <div class="container">
+        <ul class="nav">
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li>|</li>
+          <li><a href="{% url 'aboutus' %}">About Us</a></li>
+          <li>|</li>
+          <li><a href="{% url 'postLost' %}">Lost</a></li>
+          <li>|</li>
+          <li><a href="{% url 'postBook' %}">Book Listings</a></li>
+          <li>|</li>
+          <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>

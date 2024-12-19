@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindMyStuff Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+    <style>
+         /* Importing Google Fonts - Poppins */
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+.registrationPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 72vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+}
+
+.registration-container {
+    max-width: 700px;
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 10%;
+    box-shadow: -100px 100px 100px 100px rgba(0,0,0,0.2);
+}
+
+.registration-container .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.registration-container .title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #71b7e6, #75DE79);
+}
+
+.user-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+
+.input-box {
+    margin-bottom: 15px;
+    width: calc(50% - 10px);
+}
+
+.input-box span.details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.input-box input {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.input-box input:focus,
+.input-box input:valid {
+    border-color: #71b7e6;
+}
+
+.gender-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.gender-details .gender-title {
+    font-size: 20px; /* Ensures consistency with other input titles */
+    font-weight: 500;
+    margin-bottom: 5px;
+    text-align: left; /* Keeps the title aligned to the left */
+}
+
+.category {
+    display: flex;
+    justify-content: center; /* Centering the radio buttons horizontally */
+    width: 100%;
+    margin: 0 0 20px 0;
+}
+
+.category label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 10px; /* Adequate spacing between radio buttons */
+}
+
+.category .dot {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background: #d9d9d9;
+    border: 5px solid transparent;
+    transition: all 0.3s ease;
+}
+
+#dot-1:checked ~ .category label .one,
+#dot-2:checked ~ .category label .two,
+#dot-3:checked ~ .category label .three {
+    background: #71b7e6;
+    border-color: #d9d9d9;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+
+.button {
+    height: 45px;
+    margin: 35px 0;
+}
+
+.button input {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #71b7e6, #75DE79);
+}
+
+.button input:hover {
+    background: linear-gradient(135deg, #75DE79, #71b7e6);
+}
+
+@media (max-width: 584px) {
+    .registration-container {
+        padding: 15px;
+    }
+
+    .input-box {
+        width: 100%;
+    }
+
+    .category {
+        width: 100%;
+    }
+}
+
+@media (max-width: 459px) {
+    .category {
+        flex-direction: column;
+    }
+}
+
+.login-signup {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.error-field { border: 2px solid red; }
+small.error-message { color: red; }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'images/logo.jpg' %}" alt="Logo">
+                <span style="color: white;">FindMyStuff</span>
+            </a>
+        </div>
+        <div class="menu">
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'aboutus' %}">About Us</a>
+            <div class="dropdown">
+                <a href="#">Lost</a>
+                <div class="dropdown-content">
+                    <a href="#">View Lost Items</a>
+                    <a href="{% url 'postLost' %}">Post Lost Items</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#">Book Listings</a>
+                <div class="dropdown-content">
+                    <a href="#">View posted books</a>
+                    <a href="{% url 'postBook' %}">Post books</a>
+                </div>
+            </div>
+            <a href="{% url 'contactus' %}">Contact Us</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="{% url 'login' %}" class="login">Login</a>
+            <a href="{% url 'registration' %}" class="signup">SignUp</a>
+        </div>
+    </nav>
+</header>
+<div class="registrationPage">
+    <div class="registration-container">
+        <div class="title">Registration</div>
+        {% if msg %}
+            <h3 align="center"><mark>{{ messages }}</mark></h3>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="user-details">
+                <!-- Full Name Input -->
+                <div class="input-box">
+                    <span class="details">Full Name</span>
+                    <input type="text" name="fullname" placeholder="Enter your name"
+                           class="{{ form.fullname.errors|yesno:'error-field,' }}"
+                           value="{{ form.fullname.value|default_if_none:'' }}">
+                    {% for error in form.fullname.errors %}
+                        <small class="error-message">{{ error }}</small>
+                    {% endfor %}
+                </div>
+                <!-- Student ID Input -->
+                <div class="input-box">
+                    <span class="details">Student ID</span>
+                    <input type="text" name="studentid" placeholder="Enter your Student ID"
+                           class="{{ form.studentid.errors|yesno:'error-field,' }}"
+                           value="{{ form.studentid.value|default_if_none:'' }}">
+                    {% for error in form.studentid.errors %}
+                        <small class="error-message">{{ error }}</small>
+                    {% endfor %}
+                </div>
+                <!-- Email Input -->
+                <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="email" name="email" placeholder="Enter your email"
+                           class="{{ form.email.errors|yesno:'error-field,' }}"
+                           value="{{ form.email.value|default_if_none:'' }}">
+                    {% for error in form.email.errors %}
+                        <small class="error-message">{{ error }}</small>
+                    {% endfor %}
+                </div>
+                <!-- Phone Number Input -->
+                <div class="input-box">
+                    <span class="details">Phone Number</span>
+                    <input type="text" name="phone" placeholder="Enter your number"
+                           class="{{ form.phone.errors|yesno:'error-field,' }}"
+                           value="{{ form.phone.value|default_if_none:'' }}">
+                    {% for error in form.phone.errors %}
+                        <small class="error-message">{{ error }}</small>
+                    {% endfor %}
+                </div>
+                <!-- Password Input -->
+                <div class="input-box">
+                    <span class="details">Password</span>
+                    <input type="password" name="password" placeholder="Enter your password"
+                           class="{{ form.password.errors|yesno:'error-field,' }}">
+                    {% for error in form.password.errors %}
+                        <small class="error-message">{{ error }}</small>
+                    {% endfor %}
+                </div>
+                <!-- Confirm Password Input -->
+                <div class="input-box">
+                    <span class="details">Confirm Password</span>
+                    <input type="password" name="confirm_password" placeholder="Confirm your password"
+                           class="{{ form.confirm_password.errors|yesno:'error-field,' }}">
+                    {% for error in form.confirm_password.errors %}
+                        <small class="error-message">{{ error }}</small>
+                    {% endfor %}
+                </div>
+                <!-- Gender Selection -->
+          <div class="gender-details">
+            <input type="radio" name="gender" id="dot-1" value="M">
+            <input type="radio" name="gender" id="dot-2" value="F">
+            <input type="radio" name="gender" id="dot-3" value="O">
+            <span class="gender-title">Gender</span>
+            <div class="category">
+              <!-- Label for Male -->
+              <label for="dot-1">
+                <span class="dot one"></span>
+                <span class="gender">Male</span>
+              </label>
+              <!-- Label for Female -->
+              <label for="dot-2">
+                <span class="dot two"></span>
+                <span class="gender">Female</span>
+              </label>
+              <!-- Label for Prefer not to say -->
+              <label for="dot-3">
+                <span class="dot three"></span>
+                <span class="gender">Prefer not to say</span>
+              </label>
+            </div>
+          </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Register">
+            </div>
+            <!-- Login Link -->
+          <div class="login-signup">
+            <span class="text">
+              Already a member? <a href="{% url 'login' %}" class="text login-link">Login Now</a>
+            </span>
+          </div>
+        </form>
+    </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <ul class="nav">
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li>|</li>
+      <li><a href="{% url 'aboutus' %}">About Us</a></li>
+      <li>|</li>
+      <li><a href="{% url 'postLost' %}">Lost</a></li>
+      <li>|</li>
+      <li><a href="{% url 'postBook' %}">Book Listings</a></li>
+      <li>|</li>
+      <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+    </ul>
+  </div>
+</footer>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <script>
+                window.onload = function() {
+                    alert('{{ message }}');
+                }
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</body>
+</html>

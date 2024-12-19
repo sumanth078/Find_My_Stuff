@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FindMyStuff</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+  <link rel="stylesheet" href="{% static 'css/contactus.css' %}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+
+  <header>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <!-- Left Logo and Name (FMS) -->
+      <div class="logo">
+        <a href="{% url 'index' %}">
+          <img src="{% static 'images/logo.jpg' %}" alt="Logo">
+          <span style="color: white;">FindMyStuff</span>
+        </a>
+      </div>
+      <!-- Center Menu Items -->
+      <div class="menu">
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'aboutus' %}">About Us</a>
+        <div class="dropdown">
+          <a href="#">Lost</a>
+          <div class="dropdown-content">
+            <a href="#">View Lost Items</a>
+            <a href="{% url 'postLost' %}">Post Lost Items</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a href="#">Book Listings</a>
+          <div class="dropdown-content">
+            <a href="#">View posted books</a>
+            <a href="{% url 'postBook' %}">Post books</a>
+          </div>
+        </div>
+        <a href="{% url 'contactus' %}">Contact Us</a>
+      </div>
+
+      <!-- Right Login and SignUp Buttons -->
+      <div class="auth-buttons">
+        <a href="{% url 'login' %}" class="login">Login</a>
+        <a href="{% url 'registration' %}" class="signup">SignUp</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="contact">
+    <div class="contact-container">
+      <div class="text">Contact Us</div>
+      <form method="POST" action="#">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="input-data">
+            <input type="text" name="first_name" required>
+            <div class="underline"></div>
+            <label>First Name</label>
+          </div>
+          <div class="input-data">
+            <input type="text" name="last_name" required>
+            <div class="underline"></div>
+            <label>Last Name</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-data">
+            <input type="email" name="email" required>
+            <div class="underline"></div>
+            <label>Email Address</label>
+          </div>
+          <div class="input-data">
+            <input type="text" name="student_id" required>
+            <div class="underline"></div>
+            <label>Student ID</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-data textarea">
+            <textarea name="message" rows="8" cols="80" required></textarea>
+            <br />
+            <div class="underline"></div>
+            <label>Write your message</label>
+          </div>
+        </div>
+        <div class="form-row submit-btn">
+          <div class="input-data">
+            <div class="inner"></div>
+            <input type="submit" value="Submit">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+
+<footer class="footer">
+  <div class="container">
+      <ul class="nav">
+          <li><a href="{% url 'index' %}">Home</a> </li>
+          <li>|</li>
+          <li><a href="{% url 'aboutus' %}">About us</a> </li>
+          <li>|</li>
+          <li><a href="{% url 'postLost' %}">Lost</a> </li>
+          <li>|</li>
+          <li><a href="#">Book Listings</a> </li>
+          <li>|</li>
+          <li><a href="{% url 'contactus' %}">Contact Us</a> </li>
+      </ul>
+  </div>
+</footer>
+<script>
+  $(window).scroll(function(){
+    var navpanel = $('.bottom-nav');
+    var panelHeight = navpanel.height() - 4;
+    var footerHeight = $('.footer').height();
+    if($(document).height() - panelHeight - footerHeight <= $(window).scrollTop() + $(window).height()) {
+      navpanel.removeClass('fixed-bottom');
+    } else {
+      navpanel.addClass('fixed-bottom');
+    }
+  });
+</script>
+</body>
+</html>

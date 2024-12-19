@@ -1,0 +1,215 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #78CCF0;
+  padding: 15px 15px;
+  margin-bottom: 30px; /* Creates the 30px gap between the navbar and content */
+}
+
+/* Left logo and text */
+.navbar .logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar .logo img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.navbar .logo span {
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Center menu items */
+.navbar .menu {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.navbar .menu a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.navbar .menu a:hover {
+  color: #ffb341;
+}
+
+/* Dropdown styling */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  z-index: 1;
+  margin-top: 5%;
+  border-radius: 15px;
+}
+
+.dropdown-content a {
+  color: #000000 !important;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  border-radius: 15px;
+}
+
+.dropdown-content a:hover {
+  background-color: #78CCF0;
+  color: #000000 !important;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Right side buttons */
+.navbar .auth-buttons {
+  display: flex;
+  gap: 10px;
+  margin-right: 15px;
+}
+
+.navbar .auth-buttons a {
+  text-decoration: none;
+  padding: 20px 20px;
+  border: 1px solid #78CCF0;
+  border-radius: 50px;
+  color: #78CCF0;
+  font-size: 16px;
+  font-weight: 500 !important;
+}
+
+.navbar .auth-buttons a.login {
+  padding: 20px 30px !important;
+  font-weight: 500 !important;
+  background-color: #75DE79;
+  color: #ffffff;
+}
+
+.navbar .auth-buttons a.signup {
+  padding: 20px 20px !important;
+  background-color: #ffb341;
+  font-weight: 500 !important;
+  color: #ffffff;
+}
+
+.navbar .auth-buttons a.signup:hover {
+  background-color: #75DE79;
+}
+
+.navbar .auth-buttons a.login:hover {
+  background-color: #ffb341;
+}
+
+.navbar .auth-buttons a,
+.navbar .auth-buttons a.signup, .navbar .auth-buttons a.login {
+  font-weight: 700 !important;
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #0A95AA;
+  color: #fff;
+  padding: 30px 0;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer .nav {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.footer .nav a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+}
+
+.footer .copy {
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+/* Bottom navigation bar */
+.bottom-nav {
+  text-align: center;
+  background: #02BDD6;
+  color: #fff;
+  height: 35px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottom-nav .nav {
+  float: none;
+  margin: 0;
+}
+
+.bottom-nav .nav a {
+  padding: 0 25px;
+  line-height: 35px;
+}
+
+.fixed-top,
+.fixed-bottom {
+  background: #02BDD6;
+  position: fixed;
+  top: 0;
+}
+
+.fixed-bottom {
+  top: auto;
+  bottom: 0;
+}
