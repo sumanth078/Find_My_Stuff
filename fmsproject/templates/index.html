@@ -85,7 +85,7 @@
     <select id="search-category" class="search-dropdown">
       <option value="">Search by category</option>
       <option value="electronics">Electronics</option>
-      <option value="clothin&accessories">Clothing & Accessories</option>
+      <option value="clothing-accessories">Clothing & Accessories</option>
       <option value="documents">Documents</option>
     </select>
   </div>
@@ -214,7 +214,7 @@
 </div>
 
 <!-- Lost Electronics Items Section -->
-<h2 style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Electronics Items</h2>
+<h2 id="electronics-section" style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Electronics Items</h2>
 
   <!-- Sliding Cards Section -->
   <div class="cards-container">
@@ -333,7 +333,7 @@
 </div>
 
 <!-- Lost Clothing & Accessories Section -->
-<h2 style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Clothing & Accessories Items</h2>
+<h2 id="clothing-accessories-section" style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Clothing & Accessories Items</h2>
 
   <!-- Sliding Cards Section -->
   <div class="cards-container">
@@ -452,7 +452,7 @@
 </div>
 
 <!-- Lost Documents Section -->
-<h2 style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Documents</h2>
+<h2 id="documents-section" style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Documents</h2>
 
   <!-- Sliding Cards Section -->
   <div class="cards-container">
@@ -577,6 +577,8 @@
         <li>|</li>
         <li><a href="{% url 'login' %}">Lost</a> </li>
         <li>|</li>
+        <li><a href="{% url 'login' %}">Book Listings</a> </li>
+        <li>|</li>
         <li><a href="{% url 'contactus' %}">contact us</a> </li>
     </ul>
   </div>
@@ -595,5 +597,23 @@
   }
 });
 </script>
+<script>
+    $(document).ready(function() {
+      $('#search-category').change(function() {
+        var selection = $(this).val();
+        switch(selection) {
+          case 'electronics':
+            document.getElementById('electronics-section').scrollIntoView({behavior: 'smooth'});
+            break;
+          case 'clothing-accessories':
+            document.getElementById('clothing-accessories-section').scrollIntoView({behavior: 'smooth'});
+            break;
+          case 'documents':
+            document.getElementById('documents-section').scrollIntoView({behavior: 'smooth'});
+            break;
+        }
+      });
+    });
+  </script>
 </body>
 </html>

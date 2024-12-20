@@ -24,5 +24,6 @@ urlpatterns = [
     path("index",views.indexpage,name="index"),
     path("aboutus",views.aboutuspage,name="aboutus"),
     path("contactus",views.contactuspage,name="contactus"),
+    path("test",views.testpage,name="test"),
     path("",include("fmsapp.urls")),
 ]

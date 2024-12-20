@@ -12,6 +12,60 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/navbar.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <style>
+    /* Profile Container */
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Profile Icon Styling */
+.profile-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: -100px;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid #ffffff; /* Optional border for profile picture */
+}
+
+/* Dropdown for Profile Icon */
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  margin-left: -150px;
+  background-color: #ffffff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  z-index: 1;
+  border-radius: 15px;
+}
+
+.profile-dropdown a {
+  color: #000000 !important;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  border-radius: 15px;
+}
+
+.profile-dropdown a:hover {
+  background-color: #78CCF0;
+  color: #ffffff !important;
+}
+
+/* Show dropdown on hover or click */
+.profile-container:hover .profile-dropdown {
+  display: block;
+}
+
+  </style>
 </head>
 <body>
 
@@ -20,14 +74,14 @@
     <nav class="navbar">
       <!-- Left Logo and Name (FMS) -->
       <div class="logo">
-        <a href="{% url 'index' %}">
+        <a href="{% url 'indexhome' %}">
           <img src="../static/images/logo.jpg" alt="Logo">
           <span style="color: white;">FindMyStuff</span>
         </a>
       </div>
       <!-- Center Menu Items -->
       <div class="menu">
-        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'indexhome' %}">Home</a>
         <a href="#">About Us</a>
         <div class="dropdown">
           <a href="#">Lost</a>
@@ -47,9 +101,18 @@
       </div>
 
       <!-- Right Login and SignUp Buttons -->
-      <div class="auth-buttons">
+      <!-- <div class="auth-buttons">
         <a href="{% url 'userlogout' %}" class="login">Logout</a>
-      </div>
+      </div> -->
+
+      <!-- Right Profile Icon and Dropdown -->
+<div class="profile-container">
+    <img src="{% static 'images/profileicon.jpg' %}" alt="Profile Photo" class="profile-icon">
+    <div class="dropdown-content profile-dropdown">
+      <a href="{% url 'indexhome' %}">Profile</a>
+      <a href="{% url 'userlogout' %}">Logout</a>
+    </div>
+  </div>
     </nav>
   </header>
   <!-- Main Content Section -->
@@ -83,7 +146,7 @@
     <select id="search-category" class="search-dropdown">
       <option value="">Search by category</option>
       <option value="electronics">Electronics</option>
-      <option value="clothin&accessories">Clothing & Accessories</option>
+      <option value="clothing-accessories">Clothing & Accessories</option>
       <option value="documents">Documents</option>
     </select>
   </div>
@@ -212,7 +275,7 @@
 </div>
 
 <!-- Lost Electronics Items Section -->
-<h2 style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Electronics Items</h2>
+<h2 id="electronics-section" style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Electronics Items</h2>
 
   <!-- Sliding Cards Section -->
   <div class="cards-container">
@@ -331,7 +394,7 @@
 </div>
 
 <!-- Lost Clothing & Accessories Section -->
-<h2 style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Clothing & Accessories Items</h2>
+<h2 id="clothing-accessories-section" style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Clothing & Accessories Items</h2>
 
   <!-- Sliding Cards Section -->
   <div class="cards-container">
@@ -450,7 +513,7 @@
 </div>
 
 <!-- Lost Documents Section -->
-<h2 style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Documents</h2>
+<h2 id="documents-section" style="text-align: center; margin: 40px 0; color: #000000; margin-top: 80px;">Lost Documents</h2>
 
   <!-- Sliding Cards Section -->
   <div class="cards-container">
@@ -575,6 +638,8 @@
         <li>|</li>
         <li><a href="{% url 'postLost' %}">Lost</a> </li>
         <li>|</li>
+        <li><a href="{% url 'postBook' %}">Book Listings</a> </li>
+        <li>|</li>
         <li><a href="{% url 'contactus' %}">contact us</a> </li>
     </ul>
   </div>
@@ -593,5 +658,23 @@
   }
 });
 </script>
+<script>
+    $(document).ready(function() {
+      $('#search-category').change(function() {
+        var selection = $(this).val();
+        switch(selection) {
+          case 'electronics':
+            document.getElementById('electronics-section').scrollIntoView({behavior: 'smooth'});
+            break;
+          case 'clothing-accessories':
+            document.getElementById('clothing-accessories-section').scrollIntoView({behavior: 'smooth'});
+            break;
+          case 'documents':
+            document.getElementById('documents-section').scrollIntoView({behavior: 'smooth'});
+            break;
+        }
+      });
+    });
+  </script>
 </body>
 </html>

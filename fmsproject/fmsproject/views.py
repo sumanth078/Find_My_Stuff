@@ -9,7 +9,8 @@ def aboutuspage(request):
 def contactuspage(request):
     return render(request,"contactus.html")
 
-def registrationPage(request):
-    return render(request, "registration.html")
+# def registrationPage(request):
+#     return render(request, "registration.html")
 
-
+def testpage(request):
+    return render(request, "test.html")
